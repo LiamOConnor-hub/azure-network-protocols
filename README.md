@@ -25,33 +25,45 @@ In this tutorial, we observe various network traffic to and from Azure Virtual M
 
 <h2>High-Level Steps</h2>
 
-- Step 1
-- Step 2
-- Step 3
-- Step 4
+- Observe ICMP Traffic
+- Configuring a Firewall [Network Security Group]
+- Observe DNS Traffic
 
 <h2>Actions and Observations</h2>
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+Observe ICMP Traffic
+In Azure, ICMP traffic can be observed by monitoring network connectivity between virtual machines. By using tools like ping or Azure Network Watcher’s connection troubleshoot feature, you can verify whether packets are successfully reaching the destination VM. Observing ICMP responses helps confirm that VMs are correctly networked within the virtual network and that no network restrictions are blocking basic connectivity.
+  
+- Log in to both virtual machines in the Azure virtual network.
+- Open a command prompt on one VM.
+- Use the ping command to send ICMP requests to the other VM (e.g., ping <VM-IP>).
+- Observe the responses to verify packet delivery.
+- Record any failed requests and check network configuration if ICMP is blocked.
+
 </p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+<br />
+
+Configuring a Firewall [Network Security Group]
+Network Security Groups (NSGs) in Azure act as virtual firewalls, controlling inbound and outbound traffic to resources within a subnet or network interface. By creating rules to allow or deny specific traffic (such as permitting TCP port 80 for web servers or blocking ICMP from external networks), you can observe how changes to the NSG immediately affect connectivity. Monitoring these effects shows the practical impact of firewall rules on VM communication and overall network security.
+
+- Navigate to the Network Security Group (NSG) associated with your VM or subnet in the Azure Portal.
+- Review existing inbound and outbound rules.
+- Add a rule to allow or deny specific traffic, such as permitting TCP port 80 or blocking ICMP.
+- Test connectivity from a VM to verify that the rule takes effect.
+- Observe how changes in NSG rules immediately impact traffic flow and record results.
+
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+Observe DNS Traffic
+DNS traffic in Azure can be observed by examining how domain name queries are resolved between VMs and DNS servers. Using tools like nslookup or Azure’s diagnostic logs, you can track requests to the configured DNS server and responses returned. Observing DNS traffic ensures that name resolution is functioning correctly, which is critical for both Active Directory services and general network communication within the Azure environment. And always rermeber to see the most up-to-date data use the ipconfig /flushdns to clear the DNS cache
 
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+- Log in to a VM in your virtual network.
+- Open a command prompt and use nslookup to query domain names within the network (e.g., nslookup mydomain.local).
+- Monitor responses to ensure queries are resolved correctly by the configured DNS server.
+- Optionally, review Azure diagnostic logs to observe DNS request traffic.
+- Record any failures or delays to confirm proper DNS functionality within the network.
 </p>
 <br />
